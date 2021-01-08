@@ -1,7 +1,7 @@
 import React from 'react';
 import Blogs from '../../components/blogs';
 import { fetchAPI } from "../../lib/api";
-import Seo from "../../components/Seo";
+import Seo from "../../components/seo-page";
 import PropTypes from 'prop-types';
 import 
   {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Seo from "../../components/seo";
+import Seo from "../../components/seo-page";
 import Draft from '../../components/blogs/draft'
 import 
   {
