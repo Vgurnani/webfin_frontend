@@ -1,6 +1,20 @@
 import React,{ useEffect, useState }from 'react';
-import {Editor, EditorState, RichUtils} from 'draft-js';
+import {Editor, EditorState, RichUtils, DefaultDraftBlockRenderMap} from 'draft-js';
 import 'draft-js/dist/Draft.css';
+import Immutable from 'immutable'
+
+
+const MyCustomBlock = (props) => {
+return(<div className='customblock'>{props.children}</div>)
+}
+const blockRenderMap = Immutable.Map({
+  'unstyled': {
+    element: 'p',
+    wrapper: <MyCustomBlock />,
+  }
+});
+const extendedBlockRenderMap = DefaultDraftBlockRenderMap.merge(blockRenderMap);
+
 const Draft = () =>  {
   const [editorState, setEditorState] = useState(
     EditorState.createEmpty()
@@ -12,7 +26,6 @@ const Draft = () =>  {
     editor.current.focus();
   }
   const onChange = editorState => {
-    debugger
     setEditorState(editorState)
   };
  
@@ -69,6 +82,7 @@ const Draft = () =>  {
         spellCheck={true}
         userSelect="none"
         contentEditable={false}
+        blockRenderMap={extendedBlockRenderMap}
         />
     </div>
   );
@@ -95,6 +109,7 @@ const StyleButton =(props) => {
     e.preventDefault();
     props.onToggle(props.style);
   };
+
  
   let className = 'RichEditor-styleButton';
   if (props.active) {
